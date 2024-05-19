@@ -2,8 +2,11 @@
 """Regex-ing"""
 
 import logging
+import os
 import re
 from typing import List
+
+import mysql
 
 PII_FIELDS = ("name", "fields", "phone", "ssn", "password")
 
@@ -41,3 +44,15 @@ def get_logger() -> logging.Logger:
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Connect to secure database"""
+    username = os.environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    host = os.environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    psw = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+    db_name = os.environ.get("PERSONAL_DATA_DB_NAME")
+    conn = mysql.connector.connect(
+        host=host, database=db_name, user=username, password=psw
+    )
+    return conn
