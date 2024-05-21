@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Basic Auth"""
 
+import base64
 from typing import TypeVar
 
 from .auth import Auth
