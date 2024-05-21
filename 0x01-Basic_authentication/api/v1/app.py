@@ -26,6 +26,7 @@ paths = ["/api/v1/status/", "/api/v1/unauthorized/", "/api/v1/forbidden/"]
 
 @app.before_request
 def before_req():
+    """Request validation"""
     if auth is None:
         return
     if not auth.require_auth(str(request.path), paths):
