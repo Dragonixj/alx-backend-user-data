@@ -32,4 +32,4 @@ class BasicAuth(Auth):
             decoded_header = base64.b64decode(base64_authorization_header)
         except Exception:
             return None
-        return decoded_header.decode()
+        return decoded_header.decode(errors="ignore")
