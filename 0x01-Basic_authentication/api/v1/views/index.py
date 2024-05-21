@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """ Module of Index views
 """
-from api.v1.views import app_views
 from flask import abort, jsonify
+
+from api.v1.views import app_views
 
 
 @app_views.route("/status", methods=["GET"], strict_slashes=False)
@@ -34,3 +35,12 @@ def raise_401():
         - 401 error
     """
     abort(401)
+
+
+@app_views.route("/forbidden", strict_slashes=False)
+def raise_403():
+    """GET /api/v1/forbidden
+    Raise:
+        - 403 error
+    """
+    abort(403)
